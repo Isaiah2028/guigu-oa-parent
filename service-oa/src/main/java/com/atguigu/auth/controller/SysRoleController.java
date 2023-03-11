@@ -1,6 +1,7 @@
 package com.atguigu.auth.controller;
 
 import com.atguigu.auth.service.SysSysRoleService;
+import com.atguigu.common.config.exception.GuiguException;
 import com.atguigu.model.system.SysRole;
 import com.atguigu.result.Result;
 import com.atguigu.vo.system.SysRoleQueryVo;
@@ -33,6 +34,13 @@ public class SysRoleController {
     @ApiOperation("测试接口")
     @RequestMapping(path = "/test", method = RequestMethod.GET)
     public String test() {
+
+        try {
+            int a = 10/0;
+        }catch (Exception e){
+            throw new  GuiguException(200,"出现自定义异常...");
+        }
+
         return "wusisi";
     }
 

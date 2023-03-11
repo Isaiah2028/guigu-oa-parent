@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GlobalExceptionHandler {
 
 
+    /**
+     * 捕获全局异常
+     * @param e
+     * @return
+     */
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Result error(Exception e) {
@@ -22,11 +27,29 @@ public class GlobalExceptionHandler {
         return Result.fail().message("全局异常了....");
     }
 
+    /**
+     * 捕获特定异常
+     * @param e
+     * @return
+     */
     @ExceptionHandler(ArithmeticException.class)
     @ResponseBody
     public Result error(ArithmeticException e){
         e.printStackTrace();
         return Result.fail().message("执行了特定异常处理");
+    }
+
+
+    /**
+     * 捕获自定义异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(GuiguException.class)
+    @ResponseBody
+    public Result error(GuiguException e){
+        e.printStackTrace();
+        return Result.fail().message(e.getMessage()).code(e.getCode());
     }
 
 }
