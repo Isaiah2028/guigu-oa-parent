@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -35,13 +36,15 @@ public class SysRoleController {
     @RequestMapping(path = "/test", method = RequestMethod.GET)
     public String test() {
 
+/*
         try {
-            int a = 10/0;
-        }catch (Exception e){
-            throw new  GuiguException(200,"出现自定义异常...");
+            int a = 10 / 0;
+        } catch (Exception e) {
+            throw new GuiguException(200, "出现自定义异常...");
         }
+*/
 
-        return "wusisi";
+        return "sisi";
     }
 
     @ApiOperation("查询所有角色")
@@ -58,7 +61,6 @@ public class SysRoleController {
     public Result pageQueryRole(@PathVariable Long page,
                                 @PathVariable Long limit,
                                 SysRoleQueryVo sysRoleQueryVo) {
-
         Page<SysRole> pageParam = new Page<>(page, limit);
         LambdaQueryWrapper<SysRole> wrapper = new LambdaQueryWrapper<SysRole>();
         String roleName = sysRoleQueryVo.getRoleName();
@@ -68,13 +70,15 @@ public class SysRoleController {
             wrapper.like(SysRole::getRoleName, roleName);
         }
         IPage<SysRole> pageModel = sysSysRoleService.page(pageParam, wrapper);
-
+        System.out.println("分页数据：" + pageModel);
         return Result.ok(pageModel);
     }
 
     @ApiOperation("添加角色")
     @RequestMapping(path = "/addRole", method = RequestMethod.POST)
     public Result addRole(@RequestBody SysRole sysRole) {
+
+        System.out.println("添加参数：" + sysRole);
 
         boolean isAdded = sysSysRoleService.save(sysRole);
         if (isAdded) {
@@ -100,7 +104,7 @@ public class SysRoleController {
     }
 
     @ApiOperation("修改角色")
-    @RequestMapping(path = "/update", method = RequestMethod.POST)
+    @RequestMapping(path = "/update", method = RequestMethod.PUT)
     public Result updateRole(@RequestBody SysRole sysRole) {
 
         boolean isUpdated = sysSysRoleService.updateById(sysRole);
@@ -112,9 +116,12 @@ public class SysRoleController {
     }
 
     @ApiOperation("根据id删除")
-    @RequestMapping(path = "/delete/{id}", method = RequestMethod.GET)
-    public Result deleteById(@PathVariable Long id) {
+    @RequestMapping(path = "/remove/{id}", method = RequestMethod.DELETE)
+    public Result deleteById(@PathVariable("id") Long id) {
 
+//        Long.parseLong(id);
+//        long paramId = Long.parseLong(id);;
+        // String paramId = id.toString();
         boolean isDeleted = sysSysRoleService.removeById(id);
         if (isDeleted) {
             return Result.ok(isDeleted);
@@ -133,8 +140,6 @@ public class SysRoleController {
         } else {
             return Result.fail("批量删除失败...");
         }
-
     }
-
 
 }
