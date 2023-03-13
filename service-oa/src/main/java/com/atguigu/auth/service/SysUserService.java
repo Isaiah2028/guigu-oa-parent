@@ -13,4 +13,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SysUserService extends IService<SysUser> {
 
+    /**
+     * 更新用户状态
+     * @param id
+     * @param status
+     */
+     void updateStatus(Long id, Integer status);
+
 }

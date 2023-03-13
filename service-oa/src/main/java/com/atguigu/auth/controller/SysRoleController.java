@@ -4,6 +4,7 @@ import com.atguigu.auth.service.SysSysRoleService;
 import com.atguigu.common.config.exception.GuiguException;
 import com.atguigu.model.system.SysRole;
 import com.atguigu.result.Result;
+import com.atguigu.vo.system.AssginRoleVo;
 import com.atguigu.vo.system.SysRoleQueryVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -17,7 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.awt.image.ImageProducer;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: IsaiahLu
@@ -141,5 +144,29 @@ public class SysRoleController {
             return Result.fail("批量删除失败...");
         }
     }
+
+
+
+    //查询所有角色，和当前用户所属角色
+    @ApiOperation("获取角色")
+    @RequestMapping(path = "/toAssign/{userId}", method = RequestMethod.GET)
+    public Result toAssign(@PathVariable("userId") Long userId){
+
+       Map<String,Object> map =  sysSysRoleService.findRoleDataByUserId(userId);
+
+       return Result.ok(map);
+    }
+
+    //为用户分配角色
+    @ApiOperation("为用户分配角色")
+    @RequestMapping(path = "/doAssign", method = RequestMethod.POST)
+    public Result doAssign(@RequestBody AssginRoleVo assginRoleVo){
+
+       sysSysRoleService.doAssign(assginRoleVo);
+
+
+        return Result.ok();
+    }
+
 
 }

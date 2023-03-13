@@ -37,12 +37,12 @@ public class SysUserController {
     @ApiOperation(value = "用户条件分页查询")
     @RequestMapping(path = "{page}/{limit}", method = RequestMethod.GET)
     public Result getUser(@PathVariable Long page,
-                        @PathVariable Long limit,
-                        SysUserQueryVo sysUserQueryVo) {
+                          @PathVariable Long limit,
+                          SysUserQueryVo sysUserQueryVo) {
 
-        log.info("page"+ page);
-        log.info("limit"+ limit);
-        log.info("UserVo"+ sysUserQueryVo);
+        log.info("page" + page);
+        log.info("limit" + limit);
+        log.info("UserVo" + sysUserQueryVo);
 
         //创建page对象
         Page<SysUser> pageParam = new Page<>(page, limit);
@@ -102,6 +102,16 @@ public class SysUserController {
             return Result.fail();
         }
     }
+
+    @ApiOperation(value = "更新用户状态")
+    @RequestMapping(path = "/updateStatus/{id}/{status}", method = RequestMethod.GET)
+    public Result updateStatus(@PathVariable("id") Long id,
+                               @PathVariable("status") Integer status) {
+
+        sysUserService.updateStatus(id, status);
+        return Result.ok();
+    }
+
 
     @ApiOperation(value = "删除用户")
     @RequestMapping(path = "/remove/{id}", method = RequestMethod.DELETE)
