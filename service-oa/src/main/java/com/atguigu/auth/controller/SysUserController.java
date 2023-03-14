@@ -1,8 +1,9 @@
 package com.atguigu.auth.controller;
 
 import com.atguigu.auth.service.SysUserService;
+import com.atguigu.common.util.MD5;
 import com.atguigu.model.system.SysUser;
-import com.atguigu.result.Result;
+import com.atguigu.common.Result;
 import com.atguigu.vo.system.SysUserQueryVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -11,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -83,6 +85,12 @@ public class SysUserController {
     @ApiOperation(value = "添加用户")
     @RequestMapping(path = "/save", method = RequestMethod.POST)
     public Result add(@RequestBody SysUser user) {
+
+        //密码进行加密存储
+
+        String pasword = user.getPassword();
+        String passwordMD5 = MD5.encrypt(pasword);
+        user.setPassword(passwordMD5);
 
         boolean isSaveid = sysUserService.save(user);
         if (isSaveid) {
