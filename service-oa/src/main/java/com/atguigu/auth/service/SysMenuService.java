@@ -1,6 +1,7 @@
 package com.atguigu.auth.service;
 
 import com.atguigu.model.system.SysMenu;
+import com.atguigu.vo.system.AssginMenuVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -26,4 +27,17 @@ public interface SysMenuService extends IService<SysMenu> {
      * @param id
      */
     void removeMenuById(Long id);
+
+    /**
+     * 根据菜单id查询所有菜单列表
+     * @param roleId
+     * @return 菜单列表集合
+     */
+    List<SysMenu> findMenuByRoleId(Long roleId);
+
+    /**
+     * 为角色分配菜单
+     * @param assginMenuVo  前端入参（角色id,菜单id）
+     */
+    void doAssign(AssginMenuVo assginMenuVo);
 }
