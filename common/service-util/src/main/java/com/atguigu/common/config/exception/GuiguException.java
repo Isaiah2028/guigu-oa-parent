@@ -1,6 +1,6 @@
 package com.atguigu.common.config.exception;
 
-import com.atguigu.result.ResultCodeEnum;
+import com.atguigu.common.result.ResultCodeEnum;
 import lombok.Data;
 
 /**

@@ -3,7 +3,7 @@ package com.atguigu.auth.controller;
 import com.atguigu.auth.service.SysUserService;
 import com.atguigu.common.util.MD5;
 import com.atguigu.model.system.SysUser;
-import com.atguigu.common.Result;
+import com.atguigu.common.result.Result;
 import com.atguigu.vo.system.SysUserQueryVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -12,7 +12,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,6 +1,6 @@
 package com.atguigu.common.config.exception;
 
-import com.atguigu.result.Result;
+import com.atguigu.common.result.Result;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

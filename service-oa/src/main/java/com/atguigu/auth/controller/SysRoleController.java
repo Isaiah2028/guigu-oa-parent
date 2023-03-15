@@ -1,13 +1,11 @@
 package com.atguigu.auth.controller;
 
 import com.atguigu.auth.service.SysSysRoleService;
-import com.atguigu.common.config.exception.GuiguException;
 import com.atguigu.model.system.SysRole;
-import com.atguigu.result.Result;
+import com.atguigu.common.result.Result;
 import com.atguigu.vo.system.AssginRoleVo;
 import com.atguigu.vo.system.SysRoleQueryVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -17,8 +15,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import java.awt.image.ImageProducer;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +30,6 @@ public class SysRoleController {
     @Autowired
     SysSysRoleService sysSysRoleService;
 
-
     @ApiOperation("测试接口")
     @RequestMapping(path = "/test", method = RequestMethod.GET)
     public String test() {
@@ -46,7 +41,6 @@ public class SysRoleController {
             throw new GuiguException(200, "出现自定义异常...");
         }
 */
-
         return "sisi";
     }
 
